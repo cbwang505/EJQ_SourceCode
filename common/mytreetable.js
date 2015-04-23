@@ -117,7 +117,7 @@
                     //    $(this).parents("table").treetable("node", $(this).parents("tr").data(settings.nodeIdAttr)).toggle();
                  //   alert(nowid);
 
-                    this.tree[nowid].toggle()
+                    this.tree[nowid].toggle();
                     return event.preventDefault();
                 }, this));
                 this.indenter[0].style.paddingLeft = "" + (this.level() * 2 *settings.indent) + "px";
@@ -201,6 +201,7 @@
         Node.prototype._showChildren = function () {
             var child, _i, _len, _ref, _results;
             _ref = this.children;
+
             _results = [];
             for (_i = 0, _len = _ref.length; _i < _len; _i++) {
                 child = _ref[_i];
@@ -257,7 +258,7 @@
         this.each(function () {
 
 
-            var data = $(this).data("mytreetable")
+            var data = $(this).data("mytreetable");
             if (!data) {
                 $(this).data("mytreetable", (mytreetableinst = new mytreetableint(this)))
             }
@@ -267,7 +268,7 @@
             mytreetableinst.expandAll();
         })
 
-    }
+    };
     $.extend(mytreetableint.prototype, {
         attachPlugin: function (rows) {
             var node, row, i;
@@ -391,7 +392,7 @@
 
     $.fn.mytreetable.constructor = mytreetableint;
 
-})(jQuery)
+})(jQuery);
 /**
  * Created by wangcb on 2015/3/4.
  */
