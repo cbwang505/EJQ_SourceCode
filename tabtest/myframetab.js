@@ -183,7 +183,7 @@
 
             if($("#" + id).is(":hidden")) {
 
-                alert("5");
+              
                 $("#" + id).show();
 
                 $("#" + id).prevAll().hide();
