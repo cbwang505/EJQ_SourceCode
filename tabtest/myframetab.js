@@ -97,7 +97,7 @@
         addTab: function (option) {
             var _this = this;
             var id = option.id;
-           var urlimg=option.urlimg;
+            var urlimg = option.urlimg;
             var active = this.mydefault.activeClass;
             var title = option.title ? option.title : "";
             var name = this.getCutName(option.name);
@@ -105,13 +105,13 @@
             var html = this.getTabHtml(args);
             var element = $(html);
 
-            $("span.text > span",element).css(
-              {
-                  "background": "url('"+urlimg+"') no-repeat",
-                  "padding-left":"20px",
-                  "background-position-y":"-2px"
-              }
-          );
+            $("span.text > span", element).css(
+                {
+                    "background": "url('" + urlimg + "') no-repeat",
+                    "padding-left": "20px",
+                    "background-position-y": "-2px"
+                }
+            );
             // 绑定选择事件并触发。
             $(element).unbind("click").bind("click", function () {
 
@@ -126,8 +126,15 @@
                 _this.close($(this).parent().attr("id"));
                 return false;
             });
-            element.appendTo(this.mydefault.tabs);
-            element.click();
+
+            if ($("#" + id).length == 0) {
+                element.appendTo(this.mydefault.tabs);
+                element.click();
+            }else
+            {
+
+                this.click(id);
+            }
         },
 
         getTabHtml: function (o) {
@@ -173,6 +180,15 @@
         click: function (id) {
             this.mydefault.tabs.find("li").removeClass(this.mydefault.activeClass);
             $("#" + id).addClass(this.mydefault.activeClass);
+
+            if($("#" + id).is(":hidden")) {
+
+                alert("5");
+                $("#" + id).show();
+
+                $("#" + id).prevAll().hide();
+                $("#" + id).nextAll().show();
+            }
             this.loadFrame(id);
         }
         ,
