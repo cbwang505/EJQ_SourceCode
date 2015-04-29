@@ -92,27 +92,11 @@
             var alltabswidth = $(".maxWidth").width();
             var addcount= Math.round( (alltabswidth-      this.mydefault.prewidth)    / this.mydefault.defaultliwidth);
             this.mydefault.maxli = Math.round(alltabswidth / this.mydefault.defaultliwidth);
-            //this.autoshow(addcount);
-           // this.hidepreli();
-            //  alert(this.mydefault.maxli);
+
 
             this.mydefault.prewidth=alltabswidth;
         },
-        autoshow:function(len)
-        {
-            if(len>0)
-            {
 
-             var toshowindex=   this.mydefault.tabs.find("li:hidden").length-len-1;
-             if(toshowindex<0)
-             {
-
-                 toshowindex=0;
-             }
-                this.mydefault.tabs.find("li:hidden").eq(toshowindex).nextAll().show();
-                this.mydefault.tabs.find("li:hidden").eq(toshowindex).show();
-            }
-        },
         add: function (option) {
 
 
