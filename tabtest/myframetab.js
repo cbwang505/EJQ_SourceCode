@@ -23,8 +23,10 @@
             resetID: "Reset",
             closeID: "Close",
             tabs: $("#Tabs") || srctargetele,
-            frames: $("#Frames")
-
+            frames: $("#Frames"),
+            defaultliwidth: 129,
+            prewidth:null,
+            maxli: null
         };
 
 
@@ -55,6 +57,12 @@
             myframetabinst.setdefault(option);
 
             myframetabinst.attachPlugin();
+            $(window).resize(function () {
+                myframetabinst.getcurrentmaxlicount();
+
+            });
+
+
             return this;
         }
 
@@ -75,10 +83,36 @@
             $("#" + this.mydefault.closeID).click(function () {
                 _this.closeAll();
             });
+            this.getcurrentmaxlicount();
             return this;
 
         },
+        getcurrentmaxlicount: function () {
 
+            var alltabswidth = $(".maxWidth").width();
+            var addcount= Math.round( (alltabswidth-      this.mydefault.prewidth)    / this.mydefault.defaultliwidth);
+            this.mydefault.maxli = Math.round(alltabswidth / this.mydefault.defaultliwidth);
+            //this.autoshow(addcount);
+           // this.hidepreli();
+            //  alert(this.mydefault.maxli);
+
+            this.mydefault.prewidth=alltabswidth;
+        },
+        autoshow:function(len)
+        {
+            if(len>0)
+            {
+
+             var toshowindex=   this.mydefault.tabs.find("li:hidden").length-len-1;
+             if(toshowindex<0)
+             {
+
+                 toshowindex=0;
+             }
+                this.mydefault.tabs.find("li:hidden").eq(toshowindex).nextAll().show();
+                this.mydefault.tabs.find("li:hidden").eq(toshowindex).show();
+            }
+        },
         add: function (option) {
 
 
@@ -130,8 +164,8 @@
             if ($("#" + id).length == 0) {
                 element.appendTo(this.mydefault.tabs);
                 element.click();
-            }else
-            {
+
+            } else {
 
                 this.click(id);
             }
@@ -171,8 +205,8 @@
         },
         getCutName: function (name) {
             var text = String(name);
-            if (text.length > 7) {
-                return text.substring(0, 7) + "...";
+            if (text.length > 6) {
+                return text.substring(0, 6) + "...";
             }
             return text;
         }
@@ -181,18 +215,33 @@
             this.mydefault.tabs.find("li").removeClass(this.mydefault.activeClass);
             $("#" + id).addClass(this.mydefault.activeClass);
 
-            if($("#" + id).is(":hidden")) {
+            if ($("#" + id).is(":hidden")) {
 
-              
+
                 $("#" + id).show();
 
                 $("#" + id).prevAll().hide();
                 $("#" + id).nextAll().show();
             }
+
+            if( this.mydefault.tabs.find("li:visible").index($("#" + id))>this.mydefault.maxli)
+            {
+                this.hidepreli(id);
+
+            }
+
+
+
             this.loadFrame(id);
         }
         ,
-
+        hidepreli: function (id) {
+            if (this.mydefault.tabs.find("li:visible").length > this.mydefault.maxli) {
+                var nowstart =this.mydefault.tabs.find("li:visible").index($("#" + id)) +1 - this.mydefault.maxli ;
+              // this.mydefault.tabs.find("li:visible").eq(nowstart).hide();
+                this.mydefault.tabs.find("li:visible:lt("+nowstart+")").hide();
+            }
+        },
         loadFrame: function (id) {
             var id = this.getFrameID(id);
             this.mydefault.frames.find("iframe").hide();
