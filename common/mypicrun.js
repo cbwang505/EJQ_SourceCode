@@ -38,7 +38,7 @@
         // var $this = this;
 
 
-        var data = this.data("mypicrun")
+        var data = this.data("mypicrun");
         if (!data) {
             this.data("mypicrun", (mypicruninst = new mypicrunint(this)))
         }
@@ -47,7 +47,7 @@
         mypicruninst.attachPlugin();
 
 
-    }
+    };
     $.extend(mypicrunint.prototype, {
         attachPlugin: function () {
             this.mydefault.srctarget.css({"overflow": "hidden"});
@@ -65,7 +65,7 @@
             directionNavScaffold.css({
 
                 margin: "0", padding: "0", "list-style": "none"
-            })
+            });
             $("li>a", directionNavScaffold).css({
                 width: "52px",
                 height: "52px",
@@ -73,16 +73,17 @@
                 display: "block;",
                 background: " url(theme/bg_direction_nav.png) no-repeat 0 0",
                 position: "absolute",
-                top: "50%",
-                cursor: "pointer"
+                top: "40%",
+                cursor: "pointer",
+                "text-indent": "-9999px"
             });
             $("li>a.next", directionNavScaffold).css({
                 "background-position": "-52px 0"  ,"right": "-21px"
-        });;
+            });
             $("li>a.prev", directionNavScaffold).css({
                 left: "-20px"
-            });;
-    this.mydefault.directionNav = $('.flex-direction-nav li a', this.mydefault.srctarget);
+            });
+            this.mydefault.directionNav = $('.flex-direction-nav li a', this.mydefault.srctarget);
     this.mydefault.directionNav.lft = $('.flex-direction-nav li .prev', this.mydefault.srctarget);
     this.mydefault.directionNav.rht = $('.flex-direction-nav li .next', this.mydefault.srctarget);
     this.mydefault.directionNav.lft.bind("click", function (event) {
@@ -90,13 +91,13 @@
 
         var target = mypicruninst.getTarget('prev');
         mypicruninst.setPosition(target);
-    })
+    });
     this.mydefault.directionNav.rht.bind("click", function (event) {
         event.preventDefault();
         var target = mypicruninst.getTarget('next');
         mypicruninst.setPosition(target);
 
-    })
+    });
     return this;
 },
 
@@ -141,7 +142,7 @@ setdefault: function (opt) {
 $.fn.mypicrun.constructor = mypicrunint;
 
 })
-(jQuery)
+(jQuery);
 /**
  * Created by wangcb on 2015/3/4.
  */

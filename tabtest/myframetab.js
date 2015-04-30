@@ -24,7 +24,7 @@
             closeID: "Close",
             tabs: $("#Tabs") || srctargetele,
             frames: $("#Frames"),
-            defaultliwidth: 129,
+            defaultliwidth: 135,
             prewidth:null,
             maxli: null
         };
@@ -59,7 +59,7 @@
             myframetabinst.attachPlugin();
             $(window).resize(function () {
                 myframetabinst.getcurrentmaxlicount();
-
+                 myframetabinst.pinactiveli();
             });
 
 
@@ -154,7 +154,10 @@
                 this.click(id);
             }
         },
+          pinactiveli:function(){
 
+          this.click(    this.mydefault.tabs.find("."+this.mydefault.activeClass).attr("id"));
+          },
         getTabHtml: function (o) {
             var li = "<li  id='" + o.id + "' class='" + o.active + "'  title='" + o.title + "'> \n";
             li += "<a href=\"#\" class='li " + o.lock + "'> \n";
